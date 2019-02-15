@@ -8,7 +8,7 @@
 
         {% for article in articles %}
 
-            <table class="table">
+            <table class="table-center">
                 <div class="card text-center" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
@@ -29,5 +29,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('article_new') }}">Create new</a>
+    {%  set current_user = app.user%}
+    {% if current_user != null %}
+        <a href="{{ path('article_new') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Créer un article</a>
+    {% endif %}
+
 {% endblock %}

@@ -9,9 +9,10 @@
             <a class="nav-item nav-link" href="/article">Articles</a>
             {%  set current_user = app.user%}
             {% if current_user == null %}
-                <a class="nav-item nav-link" href="/login">Se connecter</a>
+                <a class="nav-item nav-link" href="{{ path('app_login')}}">Se connecter</a>
+                <a class="nav-item nav-link" href="{{ path('user_new')}}">S'inscrire</a>
             {% else %}
-                <a class="nav-item nav-link" href="/">Mon compte</a>
+                <a class="nav-item nav-link" href="/user/{{ current_user.id }}/edit">Mon compte</a>
                 <a class="nav-item nav-link" href="/logout">Se déconnecter</a>
                 <div class="nav-item">Connecté en tant que : {{ current_user.username }}</div>
 

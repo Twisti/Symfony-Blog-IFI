@@ -5,39 +5,23 @@
 {% block body %}
     <h1>Article</h1>
 
-    <table class="table">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h4 class="card-subtitle mb-2 text-muted">{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</h4>
-                <p class="card-text"{{ article.content }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-            <tr>
-                <th>CreationDate</th>
-                <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="jumbotron">
+        <h1 class="display-4">{{ article.title }}</h1>
+        <p class="lead">Publié le {{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }} par {{ article.author.username }}</p>
+        <hr class="my-4">
+        <p>{{ article.content }}</p>
+        <a class="btn btn-primary btn-lg" href="{{ path('article_index')}}" role="button">Retour</a>
+        {%  set current_user = app.user%}
+        {% if current_user != null %}
+            {% if current_user.username == article.author.username %}
+                <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary btn-lg " role="button" aria-pressed="true">Éditez cette article</a>
+                {{ include('article/_delete_form.html.twig') }}
+            {% endif %}
+        {% endif %}
 
-    <a href="{{ path('article_index') }}">back to list</a>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+    </div>
 
-    {{ include('article/_delete_form.html.twig') }}
+
+
 {% endblock %}
