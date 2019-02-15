@@ -34,7 +34,14 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $article->setCreationDate(date("Y-m-d H:i:s"));
+            $article->setCreationDate(new \DateTime());
+
+            $this->denyAccessUnlessGranted('ROLE_USER');
+            //$user = $this->getUser();
+
+            if($user =! null){
+                $article->setAuthor($this->getUser());
+            }
             $entityManager->persist($article);
             $entityManager->flush();
 

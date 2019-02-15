@@ -95,4 +95,18 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
+
+    /**
+     * @Route("/session/{username}", name="user_session", methods={"GET"})
+     */
+    public function session(Request $request): Response
+    {
+        $session = $this->get('session');
+        $session->set('current_user',$request->request->get('username'));
+
+
+        return $this->redirectToRoute('user_index');
+    }
+
 }

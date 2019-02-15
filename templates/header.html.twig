@@ -6,15 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">MAISON <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Articles</a>
-            {%  set current_user = app.session.get('current user')%}
-            {% if current_user == "" %}
-                <a class="nav-item nav-link" href="#">S'inscrire</a>
-                <a class="nav-item nav-link" href="#">Se connecter</a>
+            <a class="nav-item nav-link" href="/article">Articles</a>
+            {%  set current_user = app.user%}
+            {% if current_user == null %}
+                <a class="nav-item nav-link" href="/login">Se connecter</a>
             {% else %}
-                <a class="nav-item nav-link" href="#">Mon compte</a>
-                <div class="nav-item">Connecté en tant que : {{ current_user }}</div>
+                <a class="nav-item nav-link" href="/">Mon compte</a>
+                <a class="nav-item nav-link" href="/logout">Se déconnecter</a>
+                <div class="nav-item">Connecté en tant que : {{ current_user.username }}</div>
 
             {% endif %}
         </div>

@@ -6,6 +6,15 @@
     <h1>Article</h1>
 
     <table class="table">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h4 class="card-subtitle mb-2 text-muted">{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</h4>
+                <p class="card-text"{{ article.content }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
         <tbody>
             <tr>
                 <th>Id</th>

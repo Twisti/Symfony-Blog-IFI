@@ -3,31 +3,25 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+    <h1>Tous les articles</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>CreationDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
         {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
-                <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
+
+            <table class="table">
+                <div class="card text-center" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <h4 class="card-subtitle mb-2 text-muted">{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</h4>
+                        <a href="/article/{{ article.id }}" class="btn btn-primary">Lire ce super post</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                       écrit par :  {{ article.author.username}}
+                    </div>
+                </div>
+
+
+                   {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
